@@ -1,0 +1,108 @@
+{
+  "summary": {
+    "old_base": "http://127.0.0.1:8001",
+    "new_base": "http://127.0.0.1:8002",
+    "old_count": 5,
+    "new_count": 3,
+    "pages_matched": 3,
+    "pages_lost": 2,
+    "pages_added": 0,
+    "likely_renames": 1,
+    "critical": 3,
+    "warning": 5,
+    "info": 2
+  },
+  "pages_only_old": [
+    "/about",
+    "/blog/why-widgets-matter"
+  ],
+  "pages_only_new": [],
+  "likely_renames": [
+    {
+      "old": "/contact",
+      "new": "/contact-us"
+    }
+  ],
+  "issues": [
+    {
+      "severity": "critical",
+      "category": "content_loss",
+      "path": "/",
+      "message": "Content shrank dramatically: 68 \u2192 7 words",
+      "old_value": "68",
+      "new_value": "7"
+    },
+    {
+      "severity": "critical",
+      "category": "page_lost",
+      "path": "/about",
+      "message": "Page existed on old site but not found on new site",
+      "old_value": "http://127.0.0.1:8001/about",
+      "new_value": null
+    },
+    {
+      "severity": "critical",
+      "category": "page_lost",
+      "path": "/blog/why-widgets-matter",
+      "message": "Page existed on old site but not found on new site",
+      "old_value": "http://127.0.0.1:8001/blog/why-widgets-matter",
+      "new_value": null
+    },
+    {
+      "severity": "warning",
+      "category": "alt_text_regression",
+      "path": "/",
+      "message": "More images missing alt text: 0/2 \u2192 2/2",
+      "old_value": null,
+      "new_value": null
+    },
+    {
+      "severity": "warning",
+      "category": "json_ld_removed",
+      "path": "/",
+      "message": "JSON-LD structured data removed",
+      "old_value": null,
+      "new_value": null
+    },
+    {
+      "severity": "warning",
+      "category": "meta_description_missing",
+      "path": "/",
+      "message": "Meta description removed",
+      "old_value": "Acme Co builds the best widgets in the world. Founded 1995.",
+      "new_value": ""
+    },
+    {
+      "severity": "warning",
+      "category": "open_graph_removed",
+      "path": "/",
+      "message": "Open Graph tags removed (affects social previews)",
+      "old_value": null,
+      "new_value": null
+    },
+    {
+      "severity": "warning",
+      "category": "title_changed",
+      "path": "/",
+      "message": "Page title changed",
+      "old_value": "Welcome to Acme Co",
+      "new_value": "Acme"
+    },
+    {
+      "severity": "info",
+      "category": "h1_changed",
+      "path": "/",
+      "message": "H1 text changed",
+      "old_value": "Welcome to Acme Co",
+      "new_value": "Welcome"
+    },
+    {
+      "severity": "info",
+      "category": "page_renamed",
+      "path": "/contact",
+      "message": "Likely renamed to /contact-us",
+      "old_value": "/contact",
+      "new_value": "/contact-us"
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "migraudit"
+version = "0.1.0"
+description = "Compare two versions of a website and find what broke during migration."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [{ name = "Migraudit contributors" }]
+keywords = ["website", "migration", "audit", "seo", "crawler", "diff"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Internet :: WWW/HTTP :: Site Management",
+]
+dependencies = [
+    "httpx>=0.27",
+    "selectolax>=0.3.21",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=7", "pytest-asyncio>=0.23"]
+
+[project.urls]
+Homepage = "https://github.com/yourname/migraudit"
+Repository = "https://github.com/yourname/migraudit"
+Issues = "https://github.com/yourname/migraudit/issues"
+
+[project.scripts]
+migraudit = "migraudit.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["migraudit*"]
+exclude = ["tests*", "examples*"]

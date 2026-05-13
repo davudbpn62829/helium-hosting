@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Migraudit Report — http://127.0.0.1:8001 → http://127.0.0.1:8002</title>
+<style>
+  :root {
+    --bg: #0f1419;
+    --panel: #1a2028;
+    --border: #2a323d;
+    --text: #e6edf3;
+    --muted: #8b949e;
+    --critical: #f85149;
+    --warning: #d29922;
+    --info: #58a6ff;
+    --ok: #3fb950;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.5;
+  }
+  .wrap { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+  header h1 { font-size: 28px; margin: 0 0 8px; }
+  header .sub { color: var(--muted); font-size: 14px; }
+  .urls { display: flex; gap: 16px; flex-wrap: wrap; margin: 16px 0 32px; }
+  .url-card {
+    background: var(--panel); border: 1px solid var(--border);
+    padding: 12px 16px; border-radius: 8px; flex: 1; min-width: 280px;
+  }
+  .url-card .label { color: var(--muted); font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .url-card .value { font-family: ui-monospace, Menlo, monospace; font-size: 14px; word-break: break-all; margin-top: 4px; }
+  .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 12px; margin-bottom: 32px; }
+  .stat {
+    background: var(--panel); border: 1px solid var(--border);
+    padding: 16px; border-radius: 8px; text-align: center;
+  }
+  .stat .num { font-size: 28px; font-weight: 600; }
+  .stat .lbl { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+  .stat.critical .num { color: var(--critical); }
+  .stat.warning .num { color: var(--warning); }
+  .stat.info .num { color: var(--info); }
+  .stat.ok .num { color: var(--ok); }
+  section { margin-bottom: 32px; }
+  h2 { font-size: 20px; margin: 0 0 12px; padding-bottom: 8px; border-bottom: 1px solid var(--border); }
+  details { background: var(--panel); border: 1px solid var(--border); border-radius: 8px; margin-bottom: 8px; }
+  details summary { padding: 12px 16px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-weight: 500; }
+  details summary::-webkit-details-marker { display: none; }
+  details[open] summary { border-bottom: 1px solid var(--border); }
+  .badge {
+    display: inline-block; padding: 2px 8px; border-radius: 4px;
+    font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;
+  }
+  .badge.critical { background: rgba(248, 81, 73, 0.15); color: var(--critical); }
+  .badge.warning { background: rgba(210, 153, 34, 0.15); color: var(--warning); }
+  .badge.info { background: rgba(88, 166, 255, 0.15); color: var(--info); }
+  .issue-list { padding: 8px 16px 16px; }
+  .issue {
+    padding: 12px 0; border-bottom: 1px solid var(--border);
+    display: grid; grid-template-columns: 1fr; gap: 4px;
+  }
+  .issue:last-child { border-bottom: none; }
+  .issue .path { font-family: ui-monospace, Menlo, monospace; font-size: 13px; color: var(--info); }
+  .issue .msg { font-size: 14px; }
+  .issue .diff { font-size: 12px; color: var(--muted); font-family: ui-monospace, Menlo, monospace; margin-top: 4px; }
+  .issue .diff .old { color: var(--critical); }
+  .issue .diff .new { color: var(--ok); }
+  .empty { padding: 16px; color: var(--muted); text-align: center; }
+  .path-list { font-family: ui-monospace, Menlo, monospace; font-size: 13px; padding: 0 16px 16px; }
+  .path-list li { padding: 4px 0; word-break: break-all; }
+  footer { color: var(--muted); font-size: 12px; text-align: center; margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--border); }
+  code { background: rgba(255,255,255,0.05); padding: 1px 6px; border-radius: 3px; font-size: 0.9em; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🔍 Migration Audit Report</h1>
+    <div class="sub">Generated 2026-05-13 02:20</div>
+    <div class="urls">
+      <div class="url-card"><div class="label">Old site</div><div class="value">http://127.0.0.1:8001</div></div>
+      <div class="url-card"><div class="label">New site</div><div class="value">http://127.0.0.1:8002</div></div>
+    </div>
+  </header>
+
+  <section>
+    <div class="stats">
+      <div class="stat critical"><div class="num">3</div><div class="lbl">Critical</div></div>
+      <div class="stat warning"><div class="num">5</div><div class="lbl">Warnings</div></div>
+      <div class="stat info"><div class="num">2</div><div class="lbl">Info</div></div>
+      <div class="stat"><div class="num">3</div><div class="lbl">Pages matched</div></div>
+      <div class="stat"><div class="num">2</div><div class="lbl">Pages lost</div></div>
+      <div class="stat"><div class="num">0</div><div class="lbl">Pages added</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Issues by category</h2>
+    <details><summary><span class="badge critical">critical</span> Content Loss <span style="color:var(--muted);font-weight:400">(1)</span></summary><div class="issue-list"><div class="issue"><div class="path">/</div><div class="msg">Content shrank dramatically: 68 → 7 words</div><div class="diff"><div class="old">- 68</div><div class="new">+ 7</div></div></div></div></details><details><summary><span class="badge critical">critical</span> Page Lost <span style="color:var(--muted);font-weight:400">(2)</span></summary><div class="issue-list"><div class="issue"><div class="path">/about</div><div class="msg">Page existed on old site but not found on new site</div><div class="diff"><div class="old">- http://127.0.0.1:8001/about</div><div class="new">+ </div></div></div><div class="issue"><div class="path">/blog/why-widgets-matter</div><div class="msg">Page existed on old site but not found on new site</div><div class="diff"><div class="old">- http://127.0.0.1:8001/blog/why-widgets-matter</div><div class="new">+ </div></div></div></div></details><details><summary><span class="badge warning">warning</span> Alt Text Regression <span style="color:var(--muted);font-weight:400">(1)</span></summary><div class="issue-list"><div class="issue"><div class="path">/</div><div class="msg">More images missing alt text: 0/2 → 2/2</div></div></div></details><details><summary><span class="badge warning">warning</span> Json Ld Removed <span style="color:var(--muted);font-weight:400">(1)</span></summary><div class="issue-list"><div class="issue"><div class="path">/</div><div class="msg">JSON-LD structured data removed</div></div></div></details><details><summary><span class="badge warning">warning</span> Meta Description Missing <span style="color:var(--muted);font-weight:400">(1)</span></summary><div class="issue-list"><div class="issue"><div class="path">/</div><div class="msg">Meta description removed</div><div class="diff"><div class="old">- Acme Co builds the best widgets in the world. Founded 1995.</div><div class="new">+ </div></div></div></div></details><details><summary><span class="badge warning">warning</span> Open Graph Removed <span style="color:var(--muted);font-weight:400">(1)</span></summary><div class="issue-list"><div class="issue"><div class="path">/</div><div class="msg">Open Graph tags removed (affects social previews)</div></div></div></details><details><summary><span class="badge warning">warning</span> Title Changed <span style="color:var(--muted);font-weight:400">(1)</span></summary><div class="issue-list"><div class="issue"><div class="path">/</div><div class="msg">Page title changed</div><div class="diff"><div class="old">- Welcome to Acme Co</div><div class="new">+ Acme</div></div></div></div></details><details><summary><span class="badge info">info</span> H1 Changed <span style="color:var(--muted);font-weight:400">(1)</span></summary><div class="issue-list"><div class="issue"><div class="path">/</div><div class="msg">H1 text changed</div><div class="diff"><div class="old">- Welcome to Acme Co</div><div class="new">+ Welcome</div></div></div></div></details><details><summary><span class="badge info">info</span> Page Renamed <span style="color:var(--muted);font-weight:400">(1)</span></summary><div class="issue-list"><div class="issue"><div class="path">/contact</div><div class="msg">Likely renamed to /contact-us</div><div class="diff"><div class="old">- /contact</div><div class="new">+ /contact-us</div></div></div></div></details>
+  </section>
+
+  <section>
+    <h2>Pages only on old site (2)</h2>
+    <ul class="path-list"><li>/about</li><li>/blog/why-widgets-matter</li></ul>
+  </section>
+
+  <section>
+    <h2>Pages only on new site (0)</h2>
+    <div class="empty">No pages added.</div>
+  </section>
+
+  <section>
+    <h2>Likely renames (1)</h2>
+    <ul class="path-list"><li>/contact → /contact-us</li></ul>
+  </section>
+
+  <footer>
+    Generated by <a href="https://github.com/yourname/migraudit" style="color: var(--info);">Migraudit</a>.
+    No site data leaves your machine.
+  </footer>
+</div>
+</body>
+</html>

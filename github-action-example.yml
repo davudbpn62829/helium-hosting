@@ -1,0 +1,45 @@
+# Example: run Migraudit on every deploy and block the PR if critical regressions appear.
+# Copy this to .github/workflows/migration-audit.yml in your project.
+
+name: Migration Audit
+
+on:
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      old_url:
+        description: "Old/production URL"
+        required: true
+      new_url:
+        description: "New/staging URL"
+        required: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install migraudit
+        run: pip install migraudit
+
+      - name: Run audit
+        run: |
+          migraudit \
+            "${{ github.event.inputs.old_url || 'https://example.com' }}" \
+            "${{ github.event.inputs.new_url || 'https://staging.example.com' }}" \
+            --max-pages 500 \
+            --fail-on-critical \
+            -o migraudit-report
+
+      - name: Upload report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: migration-audit-report
+          path: |
+            migraudit-report.html
+            migraudit-report.json
